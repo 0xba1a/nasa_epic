@@ -1,6 +1,7 @@
 package com.eastrivervillage.nasaepic;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -13,6 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity implements DetailFragment.OnFragmentInteractionListener, TestFragmen.OnFragmentInteractionListener{
 
     public static final String TAG = "MainActivity";
@@ -24,10 +32,16 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
     public static final int ALLOW_INTERNET_REQUEST_CODE = 1270;
     public static final int ALLOW_NETWORK_STATE_REQUEST_CODE = 1271;
 
+    private ProgressDialog progressDialog = null;
+
+    private OkHttpClient httpClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        httpClient = new OkHttpClient();
 
         checkForInternetPermission();
     }
@@ -159,6 +173,8 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                 if (grantResults.length > 0 &&
                         grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     /* Permission Granted for Network state */
+
+                    //TODO: Check network status before loading Nasa data
                     loadNasaData();
                 } else {
                     showNoNetworkStatusExitDialog();
@@ -169,5 +185,59 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
 
     public void loadNasaData() {
         Log.e(TAG, "loadNasaData");
+        showProgressDialog("", "Satellite is busy clicking photos", false);
+
+        Request request = new Request.Builder()
+                .url(Global.BASEURL + Global.NATURAL)
+                .build();
+
+        asynchronousHttpRequest(request);
+    }
+
+    public void asynchronousHttpRequest(Request request) {
+        try {
+            httpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    Log.e(TAG, "Request failed");
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    if (!response.isSuccessful()) {
+                        Log.e(TAG, "Unexpected error");
+                    } else {
+                        Log.e(TAG, response.body().string());
+                        dismissProgressDialog();
+                    }
+                }
+            });
+        } catch (Exception e) {
+            Log.e(TAG, e + " 1 " + e.getMessage());
+        }
+    }
+
+    public void showProgressDialog(final String title, final String msg, final boolean cancellable) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog = new ProgressDialog(MainActivity.this);
+                progressDialog.setTitle(title);
+                progressDialog.setMessage(msg);
+                progressDialog.setCancelable(cancellable);
+                progressDialog.show();
+            }
+        });
+    }
+
+    public void dismissProgressDialog() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (progressDialog != null) {
+                    progressDialog.dismiss();
+                }
+            }
+        });
     }
 }
