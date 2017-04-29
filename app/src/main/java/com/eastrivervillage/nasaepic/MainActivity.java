@@ -11,8 +11,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements DetailFragment.OnFragmentInteractionListener, TestFragmen.OnFragmentInteractionListener{
+
+    public static final String TAG = "MainActivity";
 
     public static final int ALLOW_INTERNET_DIALOG_CODE = 1;
     public static final int NO_INTERNET_EXIT_CODE = 2;
@@ -26,15 +29,11 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        checkForPermission();
+        checkForInternetPermission();
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-    }
-
-    public void checkForPermission() {
-        checkForInternetPermission();
     }
 
     public void checkForInternetPermission() {
@@ -52,7 +51,17 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
     }
 
     public void checkNetworkStatePermission() {
-
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_NETWORK_STATE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.ACCESS_NETWORK_STATE)) {
+                showDialog("Permission", "Access to Network Status watch is required to monitor the Internet status",
+                        android.R.drawable.ic_dialog_info, "Allow", "Deny", ALLOW_INTERNET_STATUS_DIALOG_CODE);
+            } else {
+                requestNetworkStatusPermission();
+            }
+        } else {
+            loadNasaData();
+        }
     }
 
     public void showDialog(String title, String msg, int icon, String positiveStr, String negativeStr,
@@ -82,18 +91,43 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                 if (success) {
                     requestInternetPermission();
                 } else {
-                    showDialog("Permission", "App cannot proceed without Internet permission",
-                            android.R.drawable.ic_dialog_alert, "Allow", "Exit", NO_INTERNET_EXIT_CODE);
+                    showNoInternetExitDialog();
                 }
                 break;
+
+            case ALLOW_INTERNET_STATUS_DIALOG_CODE:
+                if (success) {
+                    requestNetworkStatusPermission();
+                } else {
+                    showNoNetworkStatusExitDialog();
+                }
+                break;
+
             case NO_INTERNET_EXIT_CODE:
                 if (success) {
-                    requestInternetPermission();
+                    checkForInternetPermission();
                 } else {
                     System.exit(0);
                 }
                 break;
+
+            case NO_INTERNET_STATUS_EXIT_CODE:
+                if (success) {
+                    checkForInternetPermission();
+                } else {
+                    System.exit(0);
+                }
         }
+    }
+
+    public void showNoInternetExitDialog() {
+        showDialog("Permission", "App cannot proceed without Internet permission",
+                android.R.drawable.ic_dialog_alert, "Allow", "Exit", NO_INTERNET_EXIT_CODE);
+    }
+
+    public void showNoNetworkStatusExitDialog() {
+        showDialog("Permission", "App cannot proceed without access to Network Status permission",
+                android.R.drawable.ic_dialog_alert, "Allow", "Exit", NO_INTERNET_STATUS_EXIT_CODE);
     }
 
     public void requestInternetPermission() {
@@ -102,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                 ALLOW_INTERNET_REQUEST_CODE);
     }
 
-    public void requestInternetStatusPermission() {
+    public void requestNetworkStatusPermission() {
         ActivityCompat.requestPermissions(MainActivity.this,
                 new String[]{Manifest.permission.ACCESS_NETWORK_STATE},
                 ALLOW_NETWORK_STATE_REQUEST_CODE);
@@ -112,15 +146,28 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case ALLOW_INTERNET_REQUEST_CODE:
-                checkNetworkStatePermission();
-                return;
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    /* Permission granted for Internet access */
+                    checkNetworkStatePermission();
+                } else {
+                    showNoInternetExitDialog();
+                }
+                break;
+
             case ALLOW_NETWORK_STATE_REQUEST_CODE:
-                loadNasaData();
-                return;
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    /* Permission Granted for Network state */
+                    loadNasaData();
+                } else {
+                    showNoNetworkStatusExitDialog();
+                }
+                break;
         }
     }
 
     public void loadNasaData() {
-
+        Log.e(TAG, "loadNasaData");
     }
 }
