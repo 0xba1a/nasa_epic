@@ -19,7 +19,7 @@
         />
 
     <fragment
-        android:name="com.eastrivervillage.nasaepic.TestFragmen"
+        android:name="com.eastrivervillage.nasaepic.ListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"

@@ -7,7 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.*;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +19,14 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-import java.io.IOException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity implements DetailFragment.OnFragmentInteractionListener, TestFragmen.OnFragmentInteractionListener{
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements DetailFragment.OnFragmentInteractionListener, ListFragment.OnFragmentInteractionListener{
 
     public static final String TAG = "MainActivity";
 
@@ -33,8 +38,11 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
     public static final int ALLOW_NETWORK_STATE_REQUEST_CODE = 1271;
 
     private ProgressDialog progressDialog = null;
+    private ListFragment listFragment;
 
     private OkHttpClient httpClient;
+
+    private List<CardData> cardDataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
         setContentView(R.layout.activity_main);
 
         httpClient = new OkHttpClient();
+        listFragment = (ListFragment) getSupportFragmentManager().findFragmentById(R.id.fr_list);
+        cardDataList = new ArrayList<>();
 
         checkForInternetPermission();
     }
@@ -207,13 +217,41 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                     if (!response.isSuccessful()) {
                         Log.e(TAG, "Unexpected error");
                     } else {
-                        Log.e(TAG, response.body().string());
-                        dismissProgressDialog();
+//                        Log.e(TAG, response.body().string());
+                        loadCardData(response.body().string());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                listFragment.setArrayList(cardDataList);
+                                dismissProgressDialog();
+                            }
+                        });
                     }
                 }
             });
         } catch (Exception e) {
             Log.e(TAG, e + " 1 " + e.getMessage());
+        }
+    }
+
+    public void loadCardData(String jsonStr) {
+        try {
+            JSONArray jsonArray = new JSONArray(jsonStr);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String date = jsonObject.getString("date");
+                date = date.trim().split("\\s+")[0];
+                String imageUrl = date;
+                imageUrl = imageUrl.replace("-", "/");
+                imageUrl = Global.ROOTURL + Global.ARCHIVE + Global.NATURAL + "/" + imageUrl + "/jpg/" + jsonObject.getString("image") + ".jpg";
+                Log.i(TAG, imageUrl);
+                CardData cardData = new CardData(date,
+                        jsonObject.getJSONObject("centroid_coordinates").getInt("lat") + "",
+                        imageUrl);
+                cardDataList.add(cardData);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e + " 3 " + e.getMessage());
         }
     }
 
