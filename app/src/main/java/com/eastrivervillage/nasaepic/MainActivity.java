@@ -240,13 +240,14 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String date = jsonObject.getString("date");
+                String time = date.trim().split("\\s+")[1];
                 date = date.trim().split("\\s+")[0];
                 String imageUrl = date;
                 imageUrl = imageUrl.replace("-", "/");
                 imageUrl = Global.ROOTURL + Global.ARCHIVE + Global.NATURAL + "/" + imageUrl + "/jpg/" + jsonObject.getString("image") + ".jpg";
                 Log.i(TAG, imageUrl);
                 CardData cardData = new CardData(date,
-                        jsonObject.getJSONObject("centroid_coordinates").getInt("lat") + "",
+                        time,
                         imageUrl);
                 cardDataList.add(cardData);
             }

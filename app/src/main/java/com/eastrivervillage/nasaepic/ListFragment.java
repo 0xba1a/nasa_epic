@@ -1,5 +1,6 @@
 package com.eastrivervillage.nasaepic;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -81,8 +83,17 @@ public class ListFragment extends Fragment {
     public void setArrayList(List<CardData> cardDataList) {
         this.cardDataList = cardDataList;
         cardAdapter = new CardAdapter(this.getActivity(), this.cardDataList);
+        RecyclerView.LayoutManager mLayoutManager;
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getActivity(), 2);
+//        int rotation = getActivity().getWindowManager().getDefaultDisplay().getRotation();
+//        if (rotation == Surface.ROTATION_0 ||
+//                rotation == Surface.ROTATION_180) {
+//            mLayoutManager = new GridLayoutManager(this.getActivity(), 2);
+//        } else {
+//            mLayoutManager = new GridLayoutManager(this.getActivity(), 3);
+//        }
+
+        mLayoutManager = new GridLayoutManager(this.getActivity(), getActivity().getResources().getInteger(R.integer.grid_column_count));
         recyclerView.setLayoutManager(mLayoutManager);
         //recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());

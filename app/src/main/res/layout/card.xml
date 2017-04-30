@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <com.eastrivervillage.nasaepic.SquareImageView
                 android:id="@+id/iv_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/album_cover_height"
@@ -44,8 +44,6 @@
                 android:layout_below="@id/tv_date"
                 android:paddingLeft="@dimen/album_title_padding"
                 android:paddingRight="@dimen/album_title_padding"
-                android:paddingTop="@dimen/album_title_padding"
-                android:textColor="@color/album_title"
                 android:textSize="@dimen/songs_count" />
 
         </RelativeLayout>
