@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,8 +20,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
 
     private Context context;
     private List<CardData> cardDataList;
+    private AdapterView.OnItemClickListener mItemClickListener;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView date, lat;
         public ImageView thumbnail;
 
@@ -30,6 +32,16 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
             date = (TextView) itemView.findViewById(R.id.tv_date);
             lat = (TextView) itemView.findViewById(R.id.tv_lat);
             thumbnail = (ImageView) itemView.findViewById(R.id.iv_thumbnail);
+
+            itemView.setOnClickListener(this);
+            thumbnail.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(null, v, getLayoutPosition(), 0);
+            }
         }
     }
 
@@ -58,5 +70,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
     @Override
     public int getItemCount() {
         return cardDataList.size();
+    }
+
+    public void setOnItemClickListener(final AdapterView.OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
     }
 }

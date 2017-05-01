@@ -21,7 +21,6 @@
                 android:id="@+id/iv_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/album_cover_height"
-                android:src="@drawable/epic_1b_20170428021005_02"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:scaleType="fitXY"/>

@@ -3,6 +3,7 @@ package com.eastrivervillage.nasaepic;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -23,10 +24,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements DetailFragment.OnFragmentInteractionListener, ListFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements ListFragment.OnFragmentInteractionListener{
 
     public static final String TAG = "MainActivity";
 
@@ -57,7 +59,15 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onFragmentInteraction(int pos) {
+        loadFullScreenActivity(pos);
+    }
+
+    public void loadFullScreenActivity(int pos) {
+        Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
+        intent.putExtra("cardDataList", (Serializable)cardDataList);
+        intent.putExtra("selectedPosition", pos);
+        startActivity(intent);
     }
 
     public void checkForInternetPermission() {
@@ -244,11 +254,10 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                 date = date.trim().split("\\s+")[0];
                 String imageUrl = date;
                 imageUrl = imageUrl.replace("-", "/");
+                String bigImageurl = Global.ROOTURL + Global.ARCHIVE + Global.NATURAL + "/" + imageUrl + "/png/" + jsonObject.getString("image") + ".png";
                 imageUrl = Global.ROOTURL + Global.ARCHIVE + Global.NATURAL + "/" + imageUrl + "/jpg/" + jsonObject.getString("image") + ".jpg";
                 Log.i(TAG, imageUrl);
-                CardData cardData = new CardData(date,
-                        time,
-                        imageUrl);
+                CardData cardData = new CardData(date, time, imageUrl, bigImageurl);
                 cardDataList.add(cardData);
             }
         } catch (Exception e) {

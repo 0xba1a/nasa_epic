@@ -8,10 +8,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.List;
 
@@ -85,28 +87,20 @@ public class ListFragment extends Fragment {
         cardAdapter = new CardAdapter(this.getActivity(), this.cardDataList);
         RecyclerView.LayoutManager mLayoutManager;
 
-//        int rotation = getActivity().getWindowManager().getDefaultDisplay().getRotation();
-//        if (rotation == Surface.ROTATION_0 ||
-//                rotation == Surface.ROTATION_180) {
-//            mLayoutManager = new GridLayoutManager(this.getActivity(), 2);
-//        } else {
-//            mLayoutManager = new GridLayoutManager(this.getActivity(), 3);
-//        }
+        cardAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e(getActivity().getClass().getSimpleName(), "Clicked pos: " + position);
+                mListener.onFragmentInteraction(position);
+            }
+        });
 
         mLayoutManager = new GridLayoutManager(this.getActivity(), getActivity().getResources().getInteger(R.integer.grid_column_count));
         recyclerView.setLayoutManager(mLayoutManager);
-        //recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(cardAdapter);
 
         cardAdapter.notifyDataSetChanged();
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -138,6 +132,6 @@ public class ListFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(int pos);
     }
 }

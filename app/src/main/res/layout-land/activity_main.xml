@@ -11,13 +11,6 @@
     android:orientation="horizontal"
     android:id="@+id/ll_container">
 
-    <!--<fragment android:name="com.eastrivervillage.nasaepic.DetailFragment"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--android:id="@+id/fr_detail"-->
-        <!--/>-->
-
     <fragment
         android:name="com.eastrivervillage.nasaepic.ListFragment"
         android:layout_width="match_parent"
