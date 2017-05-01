@@ -242,12 +242,14 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                 String date = jsonObject.getString("date");
                 String time = date.trim().split("\\s+")[1];
                 date = date.trim().split("\\s+")[0];
-                String imageUrl = date;
-                imageUrl = imageUrl.replace("-", "/");
-                imageUrl = Global.ROOTURL + Global.ARCHIVE + Global.NATURAL + "/" + imageUrl + "/jpg/" + jsonObject.getString("image") + ".jpg";
-                Log.i(TAG, imageUrl);
+                String thumpUrl = date;
+                thumpUrl = thumpUrl.replace("-", "/");
+                String imageUrl = Global.ROOTURL + Global.ARCHIVE + Global.NATURAL + "/" + thumpUrl + "/png/" + jsonObject.getString("image") + ".png";
+                thumpUrl = Global.ROOTURL + Global.ARCHIVE + Global.NATURAL + "/" + thumpUrl + "/jpg/" + jsonObject.getString("image") + ".jpg";
+                Log.i(TAG, thumpUrl);
                 CardData cardData = new CardData(date,
                         time,
+                        thumpUrl,
                         imageUrl);
                 cardDataList.add(cardData);
             }

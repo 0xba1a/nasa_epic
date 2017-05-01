@@ -2,9 +2,11 @@ package com.eastrivervillage.nasaepic;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ReceiverCallNotAllowedException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,7 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -77,7 +80,30 @@ public class ListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_container);
+        setOnclickListener(recyclerView);
         return view;
+    }
+
+    public void setOnclickListener(RecyclerView recyclerView) {
+
+        recyclerView.addOnItemTouchListener(new CardAdapter.RecyclerTouchListener(getContext(), recyclerView, new CardAdapter.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("cardDataList", (Serializable)cardDataList);
+                bundle.putInt("selectedPosition", position);
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                SlideShowFragment newFragment = SlideShowFragment.newInstance();
+                newFragment.setArguments(bundle);
+                newFragment.show(ft, "slideshow");
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
     public void setArrayList(List<CardData> cardDataList) {
