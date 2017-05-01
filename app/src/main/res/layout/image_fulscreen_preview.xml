@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black">
+
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/image_preview"
@@ -12,4 +13,29 @@
         android:layout_centerInParent="true"
         android:scaleType="fitCenter" />
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="@string/icon_wallpaper"
+            android:textColor="@android:color/white"
+            android:id="@+id/b_wallpaper"
+            android:background="@android:color/transparent"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="@string/icon_share"
+            android:textColor="@android:color/white"
+            android:id="@+id/b_share"
+            android:background="@android:color/transparent"
+            android:onClick="onButtonClick"/>
+    </LinearLayout>
+
+</RelativeLayout>

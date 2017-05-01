@@ -1,9 +1,11 @@
 package com.eastrivervillage.nasaepic;
 
+import java.io.Serializable;
+
 /**
  * Created by kannanba on 4/30/2017.
  */
-public class CardData  {
+public class CardData implements Serializable {
     public String date;
     public String lat;
     public String thumbnail;
