@@ -1,8 +1,7 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.eastrivervillage.nasaepic.SlideShowFragment">
+    android:background="@android:color/black">
 
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
@@ -48,4 +47,4 @@
 
     <!--</LinearLayout>-->
 
-</FrameLayout>
+</RelativeLayout>

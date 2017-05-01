@@ -1,9 +1,13 @@
 package com.eastrivervillage.nasaepic;
 
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -26,7 +30,7 @@ import java.util.List;
  * Use the {@link SlideShowFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SlideShowFragment extends AppCompatDialogFragment {
+public class SlideShowFragment extends DialogFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,6 +63,10 @@ public class SlideShowFragment extends AppCompatDialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Dialog dialog = getDialog();
+        /* For full-screen view */
+        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
     }
 
     @Override
