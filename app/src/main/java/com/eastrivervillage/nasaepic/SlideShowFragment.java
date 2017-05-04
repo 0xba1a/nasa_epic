@@ -1,9 +1,12 @@
 package com.eastrivervillage.nasaepic;
 
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -12,11 +15,16 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.PermissionChecker;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,10 +32,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import com.bumptech.glide.load.model.StringLoader;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -57,6 +67,9 @@ public class SlideShowFragment extends DialogFragment {
 
     private Button btn_wallpaper;
     private Button btn_share;
+
+    public View viewBak;
+    public static final int ALLOW_FLASH_WRITE_REQUEST_CODE = 1273;
 
 
     public SlideShowFragment() {
@@ -107,6 +120,22 @@ public class SlideShowFragment extends DialogFragment {
         return view;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case ALLOW_FLASH_WRITE_REQUEST_CODE:
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                            /* Permission granted for Internet access */
+                    viewPagerAdapter.onClickCallback(viewBak);
+
+                } else {
+                    Toast.makeText(getContext(), "Aborting this operation!", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
+    }
+
     private void setCurrentItem(int position) {
         viewPager.setCurrentItem(position, false);
     }
@@ -139,6 +168,10 @@ public class SlideShowFragment extends DialogFragment {
             container.removeView((View) object);
         }
 
+        public void onClickCallback(View viewBak) {
+            btnClickListener.onClick(viewBak);
+        }
+
         /**
          * On click Listener for the buttons used in ViewPager
          *
@@ -146,8 +179,13 @@ public class SlideShowFragment extends DialogFragment {
          * the buttons themselves
          */
         View.OnClickListener btnClickListener = new View.OnClickListener() {
+//            public static final int ALLOW_FLASH_WRITE_REQUEST_CODE = 1273;
+//            public String actionBak;
+
             @Override
             public void onClick(View v) {
+                viewBak = v;
+
                 switch (v.getId()) {
                     case R.id.b_share:
                         actionOnImage(Intent.ACTION_SEND);
@@ -159,43 +197,83 @@ public class SlideShowFragment extends DialogFragment {
             }
 
             public void actionOnImage(final String action) {
-                Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Bitmap image = (Bitmap) Glide
-                                    .with(getActivity())
-                                    .load(cardData.image)
-                                    .asBitmap()
-                                    .into(-1, -1)
-                                    .get();
 
-                            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                            image.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                            File f = new File(Environment.getExternalStorageDirectory() + File.separator + "temporary_file.jpg");
-                            f.createNewFile();
-                            FileOutputStream fo = new FileOutputStream(f);
-                            fo.write(bytes.toByteArray());
+                if (checkFlashWritePermission()) {
+                    Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Bitmap image = (Bitmap) Glide
+                                        .with(getActivity())
+                                        .load(cardData.image)
+                                        .asBitmap()
+                                        .into(-1, -1)
+                                        .get();
 
-                            Intent intent = new Intent(action);
+                                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                                image.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                                File f = new File(Environment.getExternalStorageDirectory() + File.separator + "temporary_file.jpg");
+                                f.createNewFile();
+                                FileOutputStream fo = new FileOutputStream(f);
+                                fo.write(bytes.toByteArray());
 
-                            if (action == Intent.ACTION_SEND) {
-                                intent.setType("image/jpeg");
-                                intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/temporary_file.jpg"));
-                                startActivity(Intent.createChooser(intent, "Share Image"));
-                            } else if (action == Intent.ACTION_ATTACH_DATA) {
-                                intent.addCategory(Intent.CATEGORY_DEFAULT);
-                                intent.setDataAndType(Uri.parse("file:///sdcard/temporary_file.jpg"), "image/jpeg");
-                                intent.putExtra("mimeType", "image/jpeg");
-                                startActivity(Intent.createChooser(intent, "Set as:"));
+                                Intent intent = new Intent(action);
+
+                                if (action == Intent.ACTION_SEND) {
+                                    intent.setType("image/jpeg");
+                                    intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/temporary_file.jpg"));
+                                    startActivity(Intent.createChooser(intent, "Share Image"));
+                                } else if (action == Intent.ACTION_ATTACH_DATA) {
+                                    intent.addCategory(Intent.CATEGORY_DEFAULT);
+                                    intent.setDataAndType(Uri.parse("file:///sdcard/temporary_file.jpg"), "image/jpeg");
+                                    intent.putExtra("mimeType", "image/jpeg");
+                                    startActivity(Intent.createChooser(intent, "Set as:"));
+                                }
+                            } catch (Exception e) {
+                                Log.e(TAG, e + " 99 " + e.getMessage());
                             }
-                        } catch (Exception e) {
-                            Log.e(TAG, e + " 99 " + e.getMessage());
                         }
-                    }
-                });
+                    });
 
-                thread.start();
+                    thread.start();
+                }
+            }
+
+            public boolean checkFlashWritePermission() {
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                        PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getContext(), "Write to External storage permission should be enabled!", Toast.LENGTH_LONG).show();
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle("Permission");
+                        builder.setMessage("Storage permission is required to continue this operation");
+                        builder.setPositiveButton("Allow", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                requestFlashWritePermission();
+                            }
+                        });
+                        builder.setNegativeButton("Deny", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getContext(), "Aborting this operation!", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        builder.show();
+                    } else {
+                        requestFlashWritePermission();
+                    }
+                } else {
+                    return true;
+                }
+
+                return false;
+            }
+
+            public void requestFlashWritePermission() {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        ALLOW_FLASH_WRITE_REQUEST_CODE);
             }
         };
 
