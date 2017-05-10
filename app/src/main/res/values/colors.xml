@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <color name="colorPrimary">#F50057</color>
-        <color name="colorPrimaryDark">#F50057</color>
+        <color name="colorPrimary">#151515</color>
+        <color name="colorPrimaryDark">#151515</color>
         <color name="colorAccent">#FF4081</color>
         <color name="viewBg">#f1f5f8</color>
-        <color name="album_title">#4c4c4c</color>
+        <color name="album_title">#feea53</color>
+        <color name="album_sub_title_color">#aaa</color>
+
+        <color name="bg_start">#aab1b9</color>
+        <color name="bg_end">#aab1b9</color>
+
+        <color name="card_bg_color">#000</color>
 </resources>

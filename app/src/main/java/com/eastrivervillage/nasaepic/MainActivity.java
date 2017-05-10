@@ -2,10 +2,14 @@ package com.eastrivervillage.nasaepic;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.*;
 import android.support.v4.content.ContextCompat;
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
     public static final int NO_INTERNET_EXIT_CODE = 2;
     public static final int ALLOW_INTERNET_STATUS_DIALOG_CODE = 3;
     public static final int NO_INTERNET_STATUS_EXIT_CODE = 4;
+    public static final int ENABLE_INTERNET_DIALOG_CODE = 5;
+    public static final int RETRY_LOADING = 6;
+
     public static final int ALLOW_INTERNET_REQUEST_CODE = 1270;
     public static final int ALLOW_NETWORK_STATE_REQUEST_CODE = 1271;
 
@@ -88,25 +95,30 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
         }
     }
 
-    public void showDialog(String title, String msg, int icon, String positiveStr, String negativeStr,
+    public void showDialog(final String title, final String msg, final int icon, final String positiveStr, final String negativeStr,
                            final int callbackCode) {
-        new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(msg)
-                .setIcon(icon)
-                .setPositiveButton(positiveStr, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialogCallback(callbackCode, true);
-                    }
-                })
-                .setNegativeButton(negativeStr, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialogCallback(callbackCode, false);
-                    }
-                })
-                .show();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(title)
+                        .setMessage(msg)
+                        .setIcon(icon)
+                        .setPositiveButton(positiveStr, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialogCallback(callbackCode, true);
+                            }
+                        })
+                        .setNegativeButton(negativeStr, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialogCallback(callbackCode, false);
+                            }
+                        })
+                        .show();
+            }
+        });
     }
 
     public void dialogCallback(int code, boolean success) {
@@ -138,6 +150,28 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
             case NO_INTERNET_STATUS_EXIT_CODE:
                 if (success) {
                     checkForInternetPermission();
+                } else {
+                    System.exit(0);
+                }
+                break;
+
+            case ENABLE_INTERNET_DIALOG_CODE:
+                if (success) {
+//                    Intent intent = new Intent(Intent.ACTION_MAIN);
+//                    intent.setClassName("com.android.phone", "com.android.phone.NetworkSetting");
+//                    startActivity(intent);
+
+                    startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS), 0);
+                    SystemClock.sleep(3000);
+                    loadNasaData();
+                } else {
+                    System.exit(0);
+                }
+                break;
+
+            case RETRY_LOADING:
+                if (success) {
+                    loadNasaData();
                 } else {
                     System.exit(0);
                 }
@@ -195,6 +229,13 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
 
     public void loadNasaData() {
         Log.e(TAG, "loadNasaData");
+
+        if (!isNetworkConnected()) {
+            showDialog("Internet", "Enable Internet to load data from NASA", android.R.drawable.ic_dialog_info,
+                    "Enable", "Cancel", ENABLE_INTERNET_DIALOG_CODE);
+            return;
+        }
+
         showProgressDialog("", "Satellite is busy clicking photos", false);
 
         Request request = new Request.Builder()
@@ -216,6 +257,9 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                 public void onResponse(Response response) throws IOException {
                     if (!response.isSuccessful()) {
                         Log.e(TAG, "Unexpected error");
+                        dismissProgressDialog();
+                        showDialog("Connection!", "Failed to load images from satelite",
+                                android.R.drawable.ic_dialog_alert, "Retry", "Exit", RETRY_LOADING);
                     } else {
 //                        Log.e(TAG, response.body().string());
                         loadCardData(response.body().string());
@@ -280,5 +324,10 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                 }
             }
         });
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
 }

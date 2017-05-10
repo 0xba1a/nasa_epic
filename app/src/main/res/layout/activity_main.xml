@@ -8,7 +8,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.eastrivervillage.nasaepic.MainActivity"
-    android:id="@+id/rl_container">
+    android:id="@+id/rl_container"
+    android:background="@drawable/background_gradient">
 
     <fragment
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
         android:name="com.eastrivervillage.nasaepic.ListFragment"
         android:id="@+id/fr_list"/>
 
-    <!--<fragment android:name="com.eastrivervillage.nasaepic.DetailFragment"-->
+    <!--<fragment android:name="earthimagesges.DetailFragment"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
         <!--android:id="@+id/fr_detail"/>-->
