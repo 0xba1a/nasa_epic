@@ -6,4 +6,27 @@
 
     <string name="icon_wallpaper">&#xf0b2;</string>
     <string name="icon_share">&#xf1e0;</string>
+
+    <string name="permission">Permission</string>
+    <string name="need_Internet_permission">Internet permission is required to access images from NASA</string>
+    <string name="need_nw_state_permissin">Access to Network Status watch is required to monitor the Internet status</string>
+    <string name="no_proceed_without_Internet">App cannot proceed without Internet permission</string>
+    <string name="no_proceed_without_nw_access">App cannot proceed without access to Network Status permission</string>
+    <string name="Internet">Internet</string>
+    <string name="enable_Internet">Enable Internet to load data from NASA</string>
+    <string name="loading_str">Satellite is busy clicking photos</string>
+    <string name="connectin">Connection</string>
+    <string name="failed_to_load">Failed to load images from satellite</string>
+    <string name="aborting">Aborting this operation!</string>
+    <string name="require_write_to_external">Write to External storage permission should be enabled!</string>
+    <string name="require_storage_permission_dialog">Storage permission is required to continue this operation</string>
+    <string name="website">www.eastrivervillage.com</string>
+
+    <string name="allow">Allow</string>
+    <string name="deny">Deny</string>
+    <string name="exit">Exit</string>
+    <string name="enable">Enable</string>
+    <string name="cancel">Cancel</string>
+    <string name="empty_str"></string>
+    <string name="retry">Retry</string>
 </resources>

@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
             /* Need to provide an explanation */
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.INTERNET)) {
-                showDialog("Permission", "Internet permission is required to access images from NASA",
-                        android.R.drawable.ic_dialog_info, "Allow", "Deny", ALLOW_INTERNET_DIALOG_CODE);
+                showDialog(getString(R.string.permission), getString(R.string.need_Internet_permission),
+                        android.R.drawable.ic_dialog_info, getString(R.string.allow), getString(R.string.deny), ALLOW_INTERNET_DIALOG_CODE);
             } else {
                 requestInternetPermission();
             }
@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_NETWORK_STATE) !=
                 PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.ACCESS_NETWORK_STATE)) {
-                showDialog("Permission", "Access to Network Status watch is required to monitor the Internet status",
-                        android.R.drawable.ic_dialog_info, "Allow", "Deny", ALLOW_INTERNET_STATUS_DIALOG_CODE);
+                showDialog(getString(R.string.permission), getString(R.string.need_nw_state_permissin),
+                        android.R.drawable.ic_dialog_info, getString(R.string.allow), getString(R.string.deny), ALLOW_INTERNET_STATUS_DIALOG_CODE);
             } else {
                 requestNetworkStatusPermission();
             }
@@ -179,13 +179,13 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
     }
 
     public void showNoInternetExitDialog() {
-        showDialog("Permission", "App cannot proceed without Internet permission",
-                android.R.drawable.ic_dialog_alert, "Allow", "Exit", NO_INTERNET_EXIT_CODE);
+        showDialog(getString(R.string.permission), getString(R.string.no_proceed_without_Internet),
+                android.R.drawable.ic_dialog_alert, getString(R.string.allow), getString(R.string.exit), NO_INTERNET_EXIT_CODE);
     }
 
     public void showNoNetworkStatusExitDialog() {
-        showDialog("Permission", "App cannot proceed without access to Network Status permission",
-                android.R.drawable.ic_dialog_alert, "Allow", "Exit", NO_INTERNET_STATUS_EXIT_CODE);
+        showDialog(getString(R.string.permission), getString(R.string.no_proceed_without_nw_access),
+                android.R.drawable.ic_dialog_alert, getString(R.string.allow), getString(R.string.exit), NO_INTERNET_STATUS_EXIT_CODE);
     }
 
     public void requestInternetPermission() {
@@ -231,12 +231,12 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
         Log.e(TAG, "loadNasaData");
 
         if (!isNetworkConnected()) {
-            showDialog("Internet", "Enable Internet to load data from NASA", android.R.drawable.ic_dialog_info,
-                    "Enable", "Cancel", ENABLE_INTERNET_DIALOG_CODE);
+            showDialog(getString(R.string.Internet), getString(R.string.enable_Internet), android.R.drawable.ic_dialog_info,
+                    getString(R.string.enable), getString(R.string.cancel), ENABLE_INTERNET_DIALOG_CODE);
             return;
         }
 
-        showProgressDialog("", "Satellite is busy clicking photos", false);
+        showProgressDialog(getString(R.string.empty_str), getString(R.string.loading_str), false);
 
         Request request = new Request.Builder()
                 .url(Global.BASEURL + Global.NATURAL)
@@ -258,8 +258,8 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                     if (!response.isSuccessful()) {
                         Log.e(TAG, "Unexpected error");
                         dismissProgressDialog();
-                        showDialog("Connection!", "Failed to load images from satelite",
-                                android.R.drawable.ic_dialog_alert, "Retry", "Exit", RETRY_LOADING);
+                        showDialog(getString(R.string.connectin), getString(R.string.failed_to_load),
+                                android.R.drawable.ic_dialog_alert, getString(R.string.retry), getString(R.string.exit), RETRY_LOADING);
                     } else {
 //                        Log.e(TAG, response.body().string());
                         loadCardData(response.body().string());

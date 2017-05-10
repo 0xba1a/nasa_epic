@@ -44,10 +44,6 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class SlideShowFragment extends DialogFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private static final String TAG = SlideShowFragment.class.getSimpleName();
 
@@ -122,7 +118,7 @@ public class SlideShowFragment extends DialogFragment {
                     viewPagerAdapter.onClickCallback(viewBak);
 
                 } else {
-                    Toast.makeText(getContext(), "Aborting this operation!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.aborting), Toast.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -234,21 +230,21 @@ public class SlideShowFragment extends DialogFragment {
             public boolean checkFlashWritePermission() {
                 if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
                         PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getContext(), "Write to External storage permission should be enabled!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.require_write_to_external), Toast.LENGTH_LONG).show();
                     if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setTitle("Permission");
-                        builder.setMessage("Storage permission is required to continue this operation");
-                        builder.setPositiveButton("Allow", new DialogInterface.OnClickListener() {
+                        builder.setTitle(getString(R.string.permission));
+                        builder.setMessage(getString(R.string.require_storage_permission_dialog));
+                        builder.setPositiveButton(getString(R.string.allow), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 requestFlashWritePermission();
                             }
                         });
-                        builder.setNegativeButton("Deny", new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton(getString(R.string.deny), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getContext(), "Aborting this operation!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getString(R.string.aborting), Toast.LENGTH_LONG).show();
                             }
                         });
                         builder.show();
