@@ -4,7 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="icon_wallpaper">&#xf0b2;</string>
+    <string name="icon_wallpaper">&#xf1c5;</string>
     <string name="icon_share">&#xf1e0;</string>
     <string name="icon_print">&#xf02f;</string>
 
@@ -21,7 +21,20 @@
     <string name="aborting">Aborting this operation!</string>
     <string name="require_write_to_external">Write to External storage permission should be enabled!</string>
     <string name="require_storage_permission_dialog">Storage permission is required to continue this operation</string>
+
+    <!-- Detail Fragment strings -->
+    <string name="detail_fragment_progress_title"></string>
+    <string name="detail_fragment_progress_dialog">Downloading the image\nPlease wait...</string>
+    <string name="print_title">EPIC print</string>
+
+    <!-- Website -->
     <string name="website">www.eastrivervillage.com</string>
+
+    <!--Preferences-->
+    <string name="settings">Settings</string>
+    <string name="preference_quality">Enhanced Image</string>
+    <string name="preference_option_normal">Normal</string>
+    <string name="preference_option_enhanced">Enhanced</string>
 
     <string name="allow">Allow</string>
     <string name="deny">Deny</string>

@@ -231,7 +231,7 @@ public class SlideShowFragment extends DialogFragment {
                                     photoPrinter.setScaleMode(PrintHelper.SCALE_MODE_FIT);
 //                                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
 //                                            R.drawable.droids);
-                                    photoPrinter.printBitmap("EPIC Print", image);
+                                    photoPrinter.printBitmap(getString(R.string.print_title), image);
                                 }
                             } catch (Exception e) {
                                 Log.e(TAG, e + " 99 " + e.getMessage());
@@ -239,7 +239,8 @@ public class SlideShowFragment extends DialogFragment {
                         }
                     });
 
-                    showProgressDialog("", "Downloading the image\nPlease wait...", false);
+                    showProgressDialog(getString(R.string.detail_fragment_progress_title),
+                            getString(R.string.detail_fragment_progress_dialog), false);
                     thread.start();
                 }
             }

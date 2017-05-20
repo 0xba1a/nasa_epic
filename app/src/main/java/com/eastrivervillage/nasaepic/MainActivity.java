@@ -5,10 +5,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.*;
@@ -17,6 +19,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -51,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
 
     private List<CardData> cardDataList;
 
+    private boolean enhancedImage = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +66,14 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
         httpClient = new OkHttpClient();
         listFragment = (ListFragment) getSupportFragmentManager().findFragmentById(R.id.fr_list);
         cardDataList = new ArrayList<>();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences pf = PreferenceManager.getDefaultSharedPreferences(this);
+        enhancedImage = pf.getBoolean("pref_enhanced", false);
 
         checkForInternetPermission();
     }
@@ -238,9 +253,16 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
 
         showProgressDialog(getString(R.string.empty_str), getString(R.string.loading_str), false);
 
-        Request request = new Request.Builder()
-                .url(Global.BASEURL + Global.NATURAL)
-                .build();
+        Request request;
+        if (enhancedImage == false) {
+            request = new Request.Builder()
+                    .url(Global.BASEURL + Global.NATURAL)
+                    .build();
+        } else {
+            request = new Request.Builder()
+                    .url(Global.BASEURL + Global.ENHANCED)
+                    .build();
+        }
 
         asynchronousHttpRequest(request);
     }
@@ -279,6 +301,7 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
     }
 
     public void loadCardData(String jsonStr) {
+        cardDataList.clear();
         try {
             JSONArray jsonArray = new JSONArray(jsonStr);
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -287,9 +310,17 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                 String time = date.trim().split("\\s+")[1];
                 date = date.trim().split("\\s+")[0];
                 String thumpUrl = date;
+                String imageUrl;
                 thumpUrl = thumpUrl.replace("-", "/");
-                String imageUrl = Global.ROOTURL + Global.ARCHIVE + Global.NATURAL + "/" + thumpUrl + "/png/" + jsonObject.getString("image") + ".png";
-                thumpUrl = Global.ROOTURL + Global.ARCHIVE + Global.NATURAL + "/" + thumpUrl + "/jpg/" + jsonObject.getString("image") + ".jpg";
+
+                if (enhancedImage == false) {
+                    imageUrl = Global.ROOTURL + Global.ARCHIVE + Global.NATURAL + "/" + thumpUrl + "/png/" + jsonObject.getString("image") + ".png";
+                    thumpUrl = Global.ROOTURL + Global.ARCHIVE + Global.NATURAL + "/" + thumpUrl + "/jpg/" + jsonObject.getString("image") + ".jpg";
+                } else {
+                    imageUrl = Global.ROOTURL + Global.ARCHIVE + Global.ENHANCED + "/" + thumpUrl + "/png/" + jsonObject.getString("image") + ".png";
+                    thumpUrl = Global.ROOTURL + Global.ARCHIVE + Global.ENHANCED + "/" + thumpUrl + "/jpg/" + jsonObject.getString("image") + ".jpg";
+                }
+
                 Log.i(TAG, thumpUrl);
                 CardData cardData = new CardData(date,
                         time,
@@ -330,4 +361,25 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.settings:
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }
