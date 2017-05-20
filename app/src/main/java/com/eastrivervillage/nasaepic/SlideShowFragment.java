@@ -3,6 +3,7 @@ package com.eastrivervillage.nasaepic;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,6 +39,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.RunnableFuture;
 
 
 /**
@@ -58,6 +60,7 @@ public class SlideShowFragment extends DialogFragment {
     private Button btn_wallpaper;
     private Button btn_share;
     private Button btn_print;
+    private ProgressDialog progressDialog = null;
 
     public View viewBak;
     public static final int ALLOW_FLASH_WRITE_REQUEST_CODE = 1273;
@@ -210,6 +213,8 @@ public class SlideShowFragment extends DialogFragment {
                                 FileOutputStream fo = new FileOutputStream(f);
                                 fo.write(bytes.toByteArray());
 
+                                dismissProgressDialog();
+
                                 Intent intent = new Intent(action);
 
                                 if (action == Intent.ACTION_SEND) {
@@ -234,7 +239,32 @@ public class SlideShowFragment extends DialogFragment {
                         }
                     });
 
+                    showProgressDialog("", "Downloading the image\nPlease wait...", false);
                     thread.start();
+                }
+            }
+
+            public void showProgressDialog(final String title, final String msg, final boolean cancellable) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog = new ProgressDialog(getActivity());
+                        progressDialog.setTitle(title);
+                        progressDialog.setMessage(msg);
+                        progressDialog.setCancelable(cancellable);
+                        progressDialog.show();
+                    }
+                });
+            }
+
+            public void dismissProgressDialog() {
+                if (null != progressDialog) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                        }
+                    });
                 }
             }
 
