@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.print.PrintHelper;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -55,10 +57,11 @@ public class SlideShowFragment extends DialogFragment {
 
     private Button btn_wallpaper;
     private Button btn_share;
+    private Button btn_print;
 
     public View viewBak;
     public static final int ALLOW_FLASH_WRITE_REQUEST_CODE = 1273;
-
+    public static final String PRINT_REQUEST = "print_image";
 
     public SlideShowFragment() {
         // Required empty public constructor
@@ -181,6 +184,8 @@ public class SlideShowFragment extends DialogFragment {
                     case R.id.b_wallpaper:
                         actionOnImage(Intent.ACTION_ATTACH_DATA);
                         break;
+                    case R.id.b_print:
+                        actionOnImage(PRINT_REQUEST);
                 }
             }
 
@@ -216,6 +221,12 @@ public class SlideShowFragment extends DialogFragment {
                                     intent.setDataAndType(Uri.parse("file:///sdcard/temporary_file.jpg"), "image/jpeg");
                                     intent.putExtra("mimeType", "image/jpeg");
                                     startActivity(Intent.createChooser(intent, "Set as:"));
+                                } else if (action == PRINT_REQUEST) {
+                                    PrintHelper photoPrinter = new PrintHelper(getActivity());
+                                    photoPrinter.setScaleMode(PrintHelper.SCALE_MODE_FIT);
+//                                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+//                                            R.drawable.droids);
+                                    photoPrinter.printBitmap("EPIC Print", image);
                                 }
                             } catch (Exception e) {
                                 Log.e(TAG, e + " 99 " + e.getMessage());
@@ -276,10 +287,16 @@ public class SlideShowFragment extends DialogFragment {
             ImageView imageViewPreview = (ImageView) view.findViewById(R.id.image_preview);
             btn_wallpaper = (Button) view.findViewById(R.id.b_wallpaper);
             btn_share = (Button) view.findViewById(R.id.b_share);
+            btn_print = (Button) view.findViewById(R.id.b_print);
+
             btn_wallpaper.setTypeface(font);
             btn_share.setTypeface(font);
+            btn_print.setTypeface(font);
+
             btn_wallpaper.setOnClickListener(btnClickListener);
             btn_share.setOnClickListener(btnClickListener);
+            btn_print.setOnClickListener(btnClickListener);
+
 
             cardData = cardDataList.get(position);
 

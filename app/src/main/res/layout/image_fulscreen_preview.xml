@@ -23,6 +23,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
+            android:text="@string/icon_print"
+            android:textColor="@android:color/white"
+            android:id="@+id/b_print"
+            android:background="@android:color/transparent"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
             android:text="@string/icon_wallpaper"
             android:textColor="@android:color/white"
             android:id="@+id/b_wallpaper"
