@@ -1,4 +1,4 @@
-package com.eastrivervillage.nasaepic;
+package com.eastrivervillage.epic;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,4 +1,4 @@
-package com.eastrivervillage.nasaepic;
+package com.eastrivervillage.epic;
 
 /**
  * Created by kannanba on 4/29/2017.

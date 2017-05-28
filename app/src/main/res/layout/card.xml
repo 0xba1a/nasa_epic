@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:background="@color/card_bg_color">
 
-            <com.eastrivervillage.nasaepic.SquareImageView
+            <com.eastrivervillage.epic.SquareImageView
                 android:id="@+id/iv_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/album_cover_height"

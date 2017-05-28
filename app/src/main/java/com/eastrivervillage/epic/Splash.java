@@ -1,4 +1,4 @@
-package com.eastrivervillage.nasaepic;
+package com.eastrivervillage.epic;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

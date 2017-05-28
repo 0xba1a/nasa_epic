@@ -2,13 +2,13 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="C:\Users\kannanba\.android\build-cache\f94cf94a535ce64535298a6be0cc7f743d02746e\output\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\kannanba\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
-        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a7006bcf584a3af9d5bc2ac2a917d5ad97806bea\classes.dex" />
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\pre-dexed\release\constraint-layout-solver-1.0.2_ed335c71743ca0f4b70e1e3815aab4945aa47ab5.jar" />
     </item>
     <item
         is-multidex="true"
@@ -30,11 +30,29 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\kannanba\.android\build-cache\f94cf94a535ce64535298a6be0cc7f743d02746e\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a7006bcf584a3af9d5bc2ac2a917d5ad97806bea\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\kannanba\.android\build-cache\f94cf94a535ce64535298a6be0cc7f743d02746e\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\pre-dexed\release\classes_a7006bcf584a3af9d5bc2ac2a917d5ad97806bea.jar" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="e911e860a11f2a1cac0e0460190724d16849c02c">
+        sha1="1dd678857687e3f0a335a79af1487478e90dc6d7">
         <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_ef4fe96fe7f26db88df5fbc49af5fa6b1444e4eb\classes.dex" />
     </item>
 
