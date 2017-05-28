@@ -422,7 +422,8 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                         calendar.get(Calendar.DAY_OF_MONTH))).show();
                 return true;
             case R.id.dev:
-                //TODO: Create and display dev activity here
+                Intent intent1 = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent1);
                 return true;
         }
 
