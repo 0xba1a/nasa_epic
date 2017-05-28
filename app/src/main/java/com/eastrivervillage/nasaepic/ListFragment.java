@@ -8,6 +8,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.AutoTransition;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,10 +79,14 @@ public class ListFragment extends Fragment {
                 bundle.putSerializable("cardDataList", (Serializable)cardDataList);
                 bundle.putInt("selectedPosition", position);
 
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 SlideShowFragment newFragment = SlideShowFragment.newInstance();
                 newFragment.setArguments(bundle);
-                newFragment.show(ft, "slideshow");
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                        .replace(R.id.rl_container, newFragment)
+                        .addToBackStack("transition")
+                        .commit();
             }
 
             @Override

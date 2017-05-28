@@ -1,6 +1,7 @@
 package com.eastrivervillage.nasaepic;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -33,9 +35,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements DetailFragment.OnFragmentInteractionListener, ListFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements DetailFragment.OnFragmentInteractionListener, ListFragment.OnFragmentInteractionListener, DatePickerDialog.OnDateSetListener {
 
     public static final String TAG = "MainActivity";
 
@@ -57,6 +60,9 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
     private List<CardData> cardDataList;
 
     private boolean enhancedImage = false;
+    private int userSelectedYear = -1;
+    private int userSelectedMonth = -1;
+    private int userSelectedDay = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -254,15 +260,23 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
         showProgressDialog(getString(R.string.empty_str), getString(R.string.loading_str), false);
 
         Request request;
+
+        String userSelectedDate = "";
+        if (userSelectedYear != -1) {
+            userSelectedDate = "/date/" + userSelectedYear + "-" + userSelectedMonth + "-" + userSelectedDay;
+        }
+
         if (enhancedImage == false) {
             request = new Request.Builder()
-                    .url(Global.BASEURL + Global.NATURAL)
+                    .url(Global.BASEURL + Global.NATURAL + userSelectedDate)
                     .build();
         } else {
             request = new Request.Builder()
-                    .url(Global.BASEURL + Global.ENHANCED)
+                    .url(Global.BASEURL + Global.ENHANCED + userSelectedDate)
                     .build();
         }
+
+        Log.e(TAG, "loadNasaData URL: " + Global.BASEURL + Global.NATURAL + userSelectedDate);
 
         asynchronousHttpRequest(request);
     }
@@ -301,9 +315,32 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
     }
 
     public void loadCardData(String jsonStr) {
-        cardDataList.clear();
         try {
             JSONArray jsonArray = new JSONArray(jsonStr);
+
+            if (jsonArray.length() == 0) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setMessage(getString(R.string.no_pics_available))
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                })
+                                .show();
+                    }
+                });
+
+                userSelectedDay = userSelectedMonth = userSelectedYear = -1;
+                dismissProgressDialog();
+                return;
+            }
+
+            cardDataList.clear();
+
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String date = jsonObject.getString("date");
@@ -377,9 +414,27 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.calender:
+                final Calendar calendar = Calendar.getInstance();
+                (new DatePickerDialog(this, MainActivity.this,
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH))).show();
+                return true;
+            case R.id.dev:
+                //TODO: Create and display dev activity here
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        userSelectedYear = year;
+        userSelectedMonth = month + 1;
+        userSelectedDay = dayOfMonth;
+
+        loadNasaData();
+    }
 }

@@ -5,7 +5,18 @@
     <item
         android:title="@string/settings"
         android:icon="@android:drawable/ic_menu_manage"
-        app:showAsAction="always"
+        app:showAsAction="never"
         android:id="@+id/settings"/>
+
+    <item
+        android:title="@string/calender"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        app:showAsAction="always"
+        android:id="@+id/calender"/>
+
+    <item
+        android:title="@string/dev"
+        app:showAsAction="never"
+        android:id="@+id/dev"/>
 
 </menu>
