@@ -7,6 +7,14 @@
     <string name="icon_wallpaper">&#xf1c5;</string>
     <string name="icon_share">&#xf1e0;</string>
     <string name="icon_print">&#xf02f;</string>
+    <string name="icon_camera">&#xf030;</string>
+    <string name="icon_space_shuttle">&#xf197;</string>
+    <string name="icon_heart">&#xf004;</string>
+
+    <!-- Home Screen -->
+    <string name="daily_images">Daily Images</string>
+    <string name="special_events">Special Events</string>
+    <string name="discover">DSCOVR</string>
 
     <string name="permission">Permission</string>
     <string name="need_Internet_permission">Internet permission is required to access images from NASA</string>
