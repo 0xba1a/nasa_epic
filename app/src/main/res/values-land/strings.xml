@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Home Screen -->
+    <string name="daily_images">Daily\nImages</string>
+    <string name="special_events">Special\nEvents</string>
+    <string name="discover">DSCOVR</string>
+</resources>

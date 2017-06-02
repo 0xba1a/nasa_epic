@@ -23,7 +23,7 @@
     <string name="no_proceed_without_nw_access">App cannot proceed without access to Network Status permission</string>
     <string name="Internet">Internet</string>
     <string name="enable_Internet">Enable Internet to load data from NASA</string>
-    <string name="loading_str">Satellite is busy clicking photos</string>
+    <string name="loading_str">Satellite is clicking photos for you</string>
     <string name="connectin">Connection</string>
     <string name="failed_to_load">Failed to load images from satellite</string>
     <string name="aborting">Aborting this operation!</string>

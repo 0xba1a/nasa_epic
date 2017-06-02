@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <color name="colorPrimary">#151515</color>
-        <color name="colorPrimaryDark">#151515</color>
+        <!--<color name="colorPrimary">#151515</color>-->
+        <!--<color name="colorPrimaryDark">#151515</color>-->
+
+        <color name="colorPrimary">#255393</color>
+        <color name="colorPrimaryDark">#062648</color>
         <color name="colorAccent">#FF4081</color>
         <color name="viewBg">#f1f5f8</color>
         <color name="album_title">#feea53</color>

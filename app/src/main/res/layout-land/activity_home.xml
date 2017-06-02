@@ -12,7 +12,8 @@
     <ImageView
         android:id="@+id/iv_homeImage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:adjustViewBounds="true"
         android:cropToPadding="false"
         app:srcCompat="@drawable/home_image"
@@ -22,19 +23,18 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
             android:background="@drawable/border"
             android:padding="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
             android:id="@+id/ll_daily_images">
 
             <TextView
@@ -53,14 +53,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@drawable/border"
             android:padding="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
             android:id="@+id/ll_special_events">
 
             <TextView
@@ -79,14 +78,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
             android:orientation="horizontal"
             android:background="@drawable/border"
             android:padding="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:id="@+id/ll_discover">
 
             <TextView
