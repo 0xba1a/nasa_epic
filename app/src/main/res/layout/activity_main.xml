@@ -17,8 +17,4 @@
         android:name="com.eastrivervillage.epic.ListFragment"
         android:id="@+id/fr_list"/>
 
-    <!--<fragment android:name="earthimagesges.DetailFragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:id="@+id/fr_detail"/>-->
 </RelativeLayout>

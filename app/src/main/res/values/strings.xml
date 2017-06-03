@@ -64,4 +64,8 @@
     <string name="ab_website">Developer\'s website</string>
     <string name="ab_source">Repository</string>
     <string name="ab_nasa_website">NASA EPIC website</string>
+
+    <!-- Special Events -->
+    <string name="view_the_images">View the Images</string>
+    <string name="watch_the_video">Watch the Video</string>
 </resources>

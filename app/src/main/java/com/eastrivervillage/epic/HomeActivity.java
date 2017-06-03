@@ -22,6 +22,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         ((TextView) findViewById(R.id.tv_discover)).setTypeface(font);
 
         ((LinearLayout) findViewById(R.id.ll_daily_images)).setOnClickListener(this);
+        ((LinearLayout) findViewById(R.id.ll_special_events)).setOnClickListener(this);
     }
 
     @Override
@@ -31,6 +32,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.ll_daily_images:
                 intent = new Intent(HomeActivity.this, MainActivity.class);
+                break;
+            case R.id.ll_special_events:
+                intent = new Intent(HomeActivity.this, SpecialEventsActivity.class);
                 break;
         }
 
