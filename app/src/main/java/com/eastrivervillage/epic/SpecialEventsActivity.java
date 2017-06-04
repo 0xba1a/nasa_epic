@@ -2,12 +2,15 @@ package com.eastrivervillage.epic;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -145,5 +148,11 @@ public class SpecialEventsActivity extends AppCompatActivity implements SpecialE
         Intent intent = new Intent(SpecialEventsActivity.this, VideoPlayerActivity.class);
         intent.putExtra("video_url", url);
         startActivity(intent);
+    }
+
+    @Override
+    public void setTypeFace(View v) {
+        Typeface font = Typeface.createFromAsset( this.getAssets(), "fontawesome-webfont.ttf" );
+        ((TextView) v).setTypeface(font);
     }
 }

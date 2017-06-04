@@ -38,24 +38,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="right">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_view_images"
-                    android:text="@string/view_the_images"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginTop="5dp"
-                    android:textSize="13sp"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:text="@string/icon_camera"
+                    android:textColor="@android:color/white"
+                    android:layout_margin="5dp"
+                    android:textSize="13sp"
+                    android:backgroundTint="@color/colorPrimary"/>
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_watch_video"
-                    android:text="@string/watch_the_video"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginTop="5dp"
-                    android:textSize="13sp"/>
+                    android:text="@string/icon_video_camera"
+                    android:textColor="@android:color/white"
+                    android:layout_margin="5dp"
+                    android:textSize="13sp"
+                    android:backgroundTint="@color/colorPrimary"/>
             </LinearLayout>
         </LinearLayout>
 

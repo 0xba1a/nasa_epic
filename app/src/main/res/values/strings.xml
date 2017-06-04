@@ -10,6 +10,7 @@
     <string name="icon_camera">&#xf030;</string>
     <string name="icon_space_shuttle">&#xf197;</string>
     <string name="icon_heart">&#xf004;</string>
+    <string name="icon_video_camera">&#xf03d;</string>
 
     <!-- Home Screen -->
     <string name="daily_images">Daily Images</string>

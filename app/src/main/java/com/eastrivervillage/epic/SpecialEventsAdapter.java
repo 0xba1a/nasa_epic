@@ -3,6 +3,7 @@ package com.eastrivervillage.epic;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.media.Image;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,8 +41,8 @@ public class SpecialEventsAdapter extends RecyclerView.Adapter<SpecialEventsAdap
         public ImageView titleImage;
         public TextView title;
         public TextView content;
-        public TextView viewImages;
-        public TextView watchVideos;
+        public Button viewImages;
+        public Button watchVideos;
         public LoadSlideShow listener;
 
         public ArrayList<CardData> cardDataList;
@@ -53,8 +55,11 @@ public class SpecialEventsAdapter extends RecyclerView.Adapter<SpecialEventsAdap
             titleImage = (ImageView) v.findViewById(R.id.iv_title_image);
             title = (TextView) v.findViewById(R.id.tv_title_text);
             content = (TextView) v.findViewById(R.id.tv_content_text);
-            viewImages = (TextView) v.findViewById(R.id.tv_view_images);
-            watchVideos = (TextView) v.findViewById(R.id.tv_watch_video);
+            viewImages = (Button) v.findViewById(R.id.tv_view_images);
+            watchVideos = (Button) v.findViewById(R.id.tv_watch_video);
+
+            listener.setTypeFace(viewImages);
+            listener.setTypeFace(watchVideos);
 
             this.listener = listener;
 
@@ -107,6 +112,7 @@ public class SpecialEventsAdapter extends RecyclerView.Adapter<SpecialEventsAdap
         public interface LoadSlideShow {
             void loadSlideShow(SlideShowFragment slideShowFragment);
             void loadVideo(String url);
+            void setTypeFace(View v);
         }
 
         public void getVideoUrl(int index) {
