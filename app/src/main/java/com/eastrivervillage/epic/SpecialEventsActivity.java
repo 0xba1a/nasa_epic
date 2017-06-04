@@ -1,8 +1,12 @@
 package com.eastrivervillage.epic;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -56,9 +60,31 @@ public class SpecialEventsActivity extends AppCompatActivity implements SpecialE
         thread.start();
     }
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
+
     public void getCardData() {
-        /* Todo: Use isNetworkConnected from MainActivity to check network connectivity
-         */
+        if (!isNetworkConnected()) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    new AlertDialog.Builder(SpecialEventsActivity.this)
+                            .setTitle(getString(R.string.no_connection_caps))
+                            .setMessage(getString(R.string.internet_is_required))
+                            .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            })
+                            .show();
+                }
+            });
+            dismissProgressDialog();
+            return;
+        }
 
         try {
             Document doc = Jsoup.connect(Global.ROOTURL + Global.GALLERY).get();
@@ -89,8 +115,23 @@ public class SpecialEventsActivity extends AppCompatActivity implements SpecialE
                 }
             });
         } catch (Exception e) {
-            //TODO: Show proper dialog to user
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    new AlertDialog.Builder(SpecialEventsActivity.this)
+                            .setTitle(getString(R.string.error_caps))
+                            .setMessage(getString(R.string.server_error))
+                            .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            })
+                            .show();
+                }
+            });
             Log.e(TAG, e + " 87 " + e.getMessage());
+            return;
         }
     }
 

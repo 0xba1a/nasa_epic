@@ -62,6 +62,8 @@
     <string name="ok">Ok</string>
     <string name="loading">Loading</string>
     <string name="loading_3dot">Loading...</string>
+    <string name="error_caps">ERROR</string>
+    <string name="server_error">Server error. Please try after sometime</string>
 
     <!-- About page -->
     <string name="ab_website">Developer\'s website</string>
@@ -71,4 +73,6 @@
     <!-- Special Events -->
     <string name="view_the_images">View the Images</string>
     <string name="watch_the_video">Watch the Video</string>
+    <string name="no_connection_caps">NO CONNECTION</string>
+    <string name="internet_is_required">Internet connectivity is required to fetch data</string>
 </resources>
