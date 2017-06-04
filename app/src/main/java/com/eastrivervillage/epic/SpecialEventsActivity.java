@@ -1,5 +1,6 @@
 package com.eastrivervillage.epic;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +32,8 @@ public class SpecialEventsActivity extends AppCompatActivity implements SpecialE
     private OkHttpClient httpClient;
     private RecyclerView recyclerView;
 
+    private ProgressDialog progressDialog = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +42,8 @@ public class SpecialEventsActivity extends AppCompatActivity implements SpecialE
         recyclerView = (RecyclerView) findViewById(R.id.rv_container);
         cardDataList = new ArrayList<SpecialEventsCardData>();
 
-        //TODO: Show loading dialog
+        showProgressDialog();
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -77,12 +81,34 @@ public class SpecialEventsActivity extends AppCompatActivity implements SpecialE
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(cardAdapter);
                     cardAdapter.notifyDataSetChanged();
+
+                    dismissProgressDialog();
                 }
             });
         } catch (Exception e) {
             //TODO: Show proper dialog to user
             Log.e(TAG, e + " 87 " + e.getMessage());
         }
+    }
+
+    public void showProgressDialog() {
+        dismissProgressDialog();
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.loading_3dot));
+        progressDialog.show();
+    }
+
+    public void dismissProgressDialog() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (progressDialog != null) {
+                    progressDialog.dismiss();
+                    progressDialog = null;
+                }
+            }
+        });
     }
 
     public void loadCardData(Element element, int index) {

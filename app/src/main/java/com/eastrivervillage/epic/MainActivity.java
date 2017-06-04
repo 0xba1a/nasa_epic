@@ -239,7 +239,6 @@ public class MainActivity extends AppCompatActivity implements DetailFragment.On
                         grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     /* Permission Granted for Network state */
 
-                    //TODO: Check network status before loading Nasa data
                     loadNasaData();
                 } else {
                     showNoNetworkStatusExitDialog();

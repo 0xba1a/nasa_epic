@@ -32,22 +32,31 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_content_text"
                 style="@style/special_events_content"/>
-            <TextView
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_view_images"
-                android:text="@string/view_the_images"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginTop="5dp"
-                android:textSize="13sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_watch_video"
-                android:text="@string/watch_the_video"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginTop="5dp"
-                android:textSize="13sp"/>
+                android:orientation="horizontal"
+                android:layout_gravity="right">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_view_images"
+                    android:text="@string/view_the_images"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginTop="5dp"
+                    android:textSize="13sp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_watch_video"
+                    android:text="@string/watch_the_video"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginTop="5dp"
+                    android:textSize="13sp"/>
+            </LinearLayout>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

@@ -68,13 +68,6 @@ public class SlideShowFragment extends DialogFragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment SlideShowFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static SlideShowFragment newInstance() {
         SlideShowFragment fragment = new SlideShowFragment();
         return fragment;
