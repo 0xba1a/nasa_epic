@@ -2,6 +2,7 @@ package com.eastrivervillage.epic;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.bumptech.glide.Glide;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.w3c.dom.Text;
 
@@ -43,6 +45,7 @@ public class SpecialEventsAdapter extends RecyclerView.Adapter<SpecialEventsAdap
 
         public ArrayList<CardData> cardDataList;
         private ArrayList<SpecialEventsCardData> eventList;
+        private String videoUrl = null;
 
         public EventHolder(View v, ArrayList<SpecialEventsCardData> eventList, LoadSlideShow listener) {
             super(v);
@@ -67,9 +70,11 @@ public class SpecialEventsAdapter extends RecyclerView.Adapter<SpecialEventsAdap
         public void onClick(View v) {
             //TODO: Show progress dialog here
 
+            int position = 0;
+
             switch (v.getId()) {
                 case R.id.tv_view_images:
-                    int position = Integer.parseInt(v.getTag() + "");
+                    position = Integer.parseInt(v.getTag() + "");
                     loadCardData(position);
 
                     if (cardDataList.isEmpty()) {
@@ -84,11 +89,51 @@ public class SpecialEventsAdapter extends RecyclerView.Adapter<SpecialEventsAdap
                     SlideShowFragment newFragment = SlideShowFragment.newInstance();
                     newFragment.setArguments(bundle);
                     listener.loadSlideShow(newFragment);
+                    break;
+
+                case R.id.tv_watch_video:
+                    position = Integer.parseInt(v.getTag() + "");
+                    getVideoUrl(position);
+                    if (videoUrl == null) {
+                        //TODO: Show appropriate dialog to user
+                        return;
+                    }
+
+                    listener.loadVideo(videoUrl);
+                    break;
             }
         }
 
         public interface LoadSlideShow {
             void loadSlideShow(SlideShowFragment slideShowFragment);
+            void loadVideo(String url);
+        }
+
+        public void getVideoUrl(int index) {
+            final String url = eventList.get(index).videoUrl;
+            videoUrl = null;
+
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Document doc = Jsoup.connect(Global.ROOTURL + "/" + url).get();
+                        Element element = doc.getElementsByTag("source").get(0);
+                        videoUrl = element.attr("src");
+                    } catch (Exception e) {
+                        //TODO: Show dialog to user
+                        Log.e("SpecialEventsAdapter", e + " 82 " + e.getMessage());
+                        return;
+                    }
+                }
+            });
+
+            try {
+                thread.start();
+                thread.join();
+            } catch (Exception e) {
+                Log.e("SpecialEventsAdapter", e + " 73 " + e.getMessage());
+            }
         }
 
         public void loadCardData(int index) {

@@ -2,6 +2,105 @@
 <items version="2" >
 
     <item
+        is-multidex="true"
+        jar="C:\Users\kannanba\.android\build-cache\408a04fb7882e8f61dd0cb5a4ec626e833773c7c\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="3ecb9d2aad9a03dd8d0914b715cc1fc11d942c6c">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_7f1ef2f2b9768e6979221e494402427e016dfa2e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kannanba\.android\build-cache\e2e04d30f3a1a033cfafae6b94adcabcdd161d21\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_26b369593fe5544e790c62744bf7b6ad11cdf55d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\libs\jsoup-1.10.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="61f84a97f1a4f5905547b8b74afff8dc93f4cfce">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\2\jsoup-1.10.2_08f92131997a15b3897632f5593f7516f664633e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kannanba\.android\build-cache\1c48beaf7564c92a12419392d786333d4fc81913\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="31abcff1d93243e1d25afda575266ca6219fadd1">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_772335172dd824836e68d1dcdc789c6cb5c00143\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kannanba\.android\build-cache\b56e61bfb676669bfe3886666ed9a82b70d53db0\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6c41c376ce015428b8c24c08f5785b2824a4439a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kannanba\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\glide-3.7.0_14892c9c3fd1c33e5a921b6780125b1e0b72ea37\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kannanba\.android\build-cache\a52e6d9226b13d3991dcc70d186d64799a6dd2c9\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_53916107f09b367ba027d4e2cb62a621a726e7da\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kannanba\.android\build-cache\3d93ddbc0732d92547f4bd96f2a94a165876fb9d\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="bc987989a5b6a23cc00d436f97cbf82e644c739d">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9f18577b525b1bcd54e2367124ca1fafea4e8b51\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kannanba\.android\build-cache\fdfb5fbc5856434d4a93b383f08cb48b1c4ebe33\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d693de2e5cb518acefc66b311c5437245a55e953">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6146dc8232a91905855692861f7386881ec8f32b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kannanba\.android\build-cache\e55995659b9f5d2382bbc85eb54be700c006bcd8\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="183fcbfcca75b095b63125f5e31ebd8b5f5f3216">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4ba36cac6f8f099f4d84135cf9fbc067b03da378\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kannanba\.android\build-cache\3d63effaebcdcce905d3b5e679b5501dd2e8bcc5\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_51ddcaf6e2cbcd3c92656dfb064d2eb5eb5cf39d\classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="C:\Users\kannanba\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
         jumboMode="false"
@@ -21,30 +120,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\kannanba\.android\build-cache\e2e04d30f3a1a033cfafae6b94adcabcdd161d21\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_26b369593fe5544e790c62744bf7b6ad11cdf55d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\kannanba\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
         sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
         <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.2_ed335c71743ca0f4b70e1e3815aab4945aa47ab5\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\libs\jsoup-1.10.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="61f84a97f1a4f5905547b8b74afff8dc93f4cfce">
-        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\2\jsoup-1.10.2_08f92131997a15b3897632f5593f7516f664633e\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -57,12 +138,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\kannanba\.android\build-cache\b56e61bfb676669bfe3886666ed9a82b70d53db0\output\jars\classes.jar"
+        jar="C:\Users\kannanba\.android\build-cache\ff059ee6c998b482e1a6477d7c3abf47225259bb\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="95519720620b553f63afc789beba9ad582807f7c">
-        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6c41c376ce015428b8c24c08f5785b2824a4439a\classes.dex" />
+        sha1="9378fbfd5efac15a959cc01ec3e357519fcb1803">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f857e82959dba8f707e652c756de95b63b1d4710\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -102,21 +183,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\kannanba\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
+        jar="C:\Users\kannanba\.android\build-cache\fb8862bdbf13aa8236f1e0f2eb1092f8e2bf9cef\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
-        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\glide-3.7.0_14892c9c3fd1c33e5a921b6780125b1e0b72ea37\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\kannanba\.android\build-cache\a52e6d9226b13d3991dcc70d186d64799a6dd2c9\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
-        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_53916107f09b367ba027d4e2cb62a621a726e7da\classes.dex" />
+        sha1="da8de86508506835a703365e1e4f61be33c35636">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6e9cf56a612607a670a34ab3cbd4f234fc193d09\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -126,15 +198,6 @@
         revision="25.0.3"
         sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
         <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b67cad07c4a432972f3c5636b4ed77768139d950\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\kannanba\.android\build-cache\e55995659b9f5d2382bbc85eb54be700c006bcd8\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="183fcbfcca75b095b63125f5e31ebd8b5f5f3216">
-        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4ba36cac6f8f099f4d84135cf9fbc067b03da378\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -174,12 +237,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\kannanba\.android\build-cache\3d63effaebcdcce905d3b5e679b5501dd2e8bcc5\output\jars\classes.jar"
+        jar="C:\Users\kannanba\.android\build-cache\d54462c6e0914f17b25af8c847e2983170141e26\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
-        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_51ddcaf6e2cbcd3c92656dfb064d2eb5eb5cf39d\classes.dex" />
+        sha1="f910b2515f289538a88820fd5e47e2502225e44e">
+        <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f8f76d48277a7c615d958dacf38f1d586f37e323\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -196,7 +259,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="29ae38268d53814ec25fa177fb8c2db81f8c44fa">
+        sha1="c202196c41758ca621347e893d6c4376cfd8c34a">
         <dex dex="C:\Users\kannanba\Google Drive\PG\Android\nasa_epic\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_ef4fe96fe7f26db88df5fbc49af5fa6b1444e4eb\classes.dex" />
     </item>
 

@@ -1,5 +1,6 @@
 package com.eastrivervillage.epic;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -111,5 +112,12 @@ public class SpecialEventsActivity extends AppCompatActivity implements SpecialE
     @Override
     public void loadSlideShow(SlideShowFragment slideShowFragment) {
         slideShowFragment.show(getSupportFragmentManager(), "TAG");
+    }
+
+    @Override
+    public void loadVideo(String url) {
+        Intent intent = new Intent(SpecialEventsActivity.this, VideoPlayerActivity.class);
+        intent.putExtra("video_url", url);
+        startActivity(intent);
     }
 }

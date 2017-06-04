@@ -26,7 +26,8 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".SpecialEventsActivity"></activity>
+        <activity android:name=".SpecialEventsActivity" />
+        <activity android:name=".VideoPlayerActivity"></activity>
     </application>
 
 </manifest>
