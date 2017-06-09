@@ -12,7 +12,7 @@
     <!-- Home Screen -->
     <string name="daily_images">Daily Images</string>
     <string name="special_events">Special Events</string>
-    <string name="discover">DSCOVR</string>
+    <string name="discover">EPIC</string>
 
     <string name="permission">Permission</string>
     <string name="need_Internet_permission">Internet permission is required to access images from NASA</string>

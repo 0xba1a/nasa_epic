@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         ((LinearLayout) findViewById(R.id.ll_daily_images)).setOnClickListener(this);
         ((LinearLayout) findViewById(R.id.ll_special_events)).setOnClickListener(this);
+        ((LinearLayout) findViewById(R.id.ll_discover)).setOnClickListener(this);
 
         checkForInternetPermission();
     }
@@ -54,6 +55,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.ll_special_events:
                 intent = new Intent(HomeActivity.this, SpecialEventsActivity.class);
+                break;
+            case R.id.ll_discover:
+                intent = new Intent(HomeActivity.this, DiscoverActivity.class);
                 break;
         }
 
