@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements DetailFragment.OnFragmentInteractionListener, ListFragment.OnFragmentInteractionListener, DatePickerDialog.OnDateSetListener {
+public class MainActivity extends AppCompatActivity implements ListFragment.OnFragmentInteractionListener, DatePickerDialog.OnDateSetListener {
 
     public static final String TAG = "MainActivity";
 

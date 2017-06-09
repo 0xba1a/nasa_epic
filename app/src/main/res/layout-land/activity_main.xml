@@ -12,13 +12,6 @@
     android:id="@+id/ll_container"
     android:background="@drawable/background_gradient">
 
-    <!--<fragment android:name="earthimagesges.DetailFragment"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--android:id="@+id/fr_detail"-->
-        <!--/>-->
-
     <fragment
         android:name="com.eastrivervillage.epic.ListFragment"
         android:layout_width="match_parent"

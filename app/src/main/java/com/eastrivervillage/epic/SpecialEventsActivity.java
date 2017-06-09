@@ -135,25 +135,13 @@ public class SpecialEventsActivity extends AppCompatActivity implements SpecialE
         }
     }
 
-    public void showProgressDialog() {
-        dismissProgressDialog();
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.loading_3dot));
-        progressDialog.show();
-    }
-
-    public void dismissProgressDialog() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (progressDialog != null) {
-                    progressDialog.dismiss();
-                    progressDialog = null;
-                }
-            }
-        });
-    }
+//    public void showProgressDialog() {
+//        dismissProgressDialog();
+//
+//        progressDialog = new ProgressDialog(this);
+//        progressDialog.setMessage(getString(R.string.loading_3dot));
+//        progressDialog.show();
+//    }
 
     public void loadCardData(Element element, int index) {
         boolean hasImages = false;
@@ -180,6 +168,20 @@ public class SpecialEventsActivity extends AppCompatActivity implements SpecialE
     }
 
     @Override
+    public void noDataAvailableNow() {
+        new AlertDialog.Builder(SpecialEventsActivity.this)
+                .setTitle(getString(R.string.error_caps))
+                .setMessage(getString(R.string.no_data_available))
+                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .show();
+    }
+
+    @Override
     public void loadSlideShow(SlideShowFragment slideShowFragment) {
         slideShowFragment.show(getSupportFragmentManager(), "TAG");
     }
@@ -195,5 +197,34 @@ public class SpecialEventsActivity extends AppCompatActivity implements SpecialE
     public void setTypeFace(View v) {
         Typeface font = Typeface.createFromAsset( this.getAssets(), "fontawesome-webfont.ttf" );
         ((TextView) v).setTypeface(font);
+    }
+
+    @Override
+    public void showProgressDialog() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                dismissProgressDialog();
+
+                progressDialog = new ProgressDialog(SpecialEventsActivity.this);
+                progressDialog.setTitle("");
+                progressDialog.setMessage(getString(R.string.loading_3dot));
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+            }
+        });
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (progressDialog != null) {
+                    progressDialog.dismiss();
+                    progressDialog = null;
+                }
+            }
+        });
     }
 }

@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">Nasa Epic</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="icon_wallpaper">&#xf1c5;</string>
     <string name="icon_share">&#xf1e0;</string>
     <string name="icon_print">&#xf02f;</string>
@@ -64,6 +61,8 @@
     <string name="loading_3dot">Loading...</string>
     <string name="error_caps">ERROR</string>
     <string name="server_error">Server error. Please try after sometime</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <!-- About page -->
     <string name="ab_website">Developer\'s website</string>
@@ -75,4 +74,9 @@
     <string name="watch_the_video">Watch the Video</string>
     <string name="no_connection_caps">NO CONNECTION</string>
     <string name="internet_is_required">Internet connectivity is required to fetch data</string>
+    <string name="no_data_available">Sorry. No data available now. Please try after sometime</string>
+
+    <!-- Video Player Activity -->
+    <string name="error_playing_video">Cannot play video here. Shall I open the video in browser</string>
+    <string name="no_related_activity">Sorry. Cannot find a browser to play this video</string>
 </resources>

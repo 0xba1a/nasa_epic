@@ -1,6 +1,7 @@
 package com.eastrivervillage.epic;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -8,6 +9,7 @@ import android.media.Image;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,7 +75,7 @@ public class SpecialEventsAdapter extends RecyclerView.Adapter<SpecialEventsAdap
 
         @Override
         public void onClick(View v) {
-            //TODO: Show progress dialog here
+            listener.showProgressDialog();
 
             int position = 0;
 
@@ -81,9 +83,10 @@ public class SpecialEventsAdapter extends RecyclerView.Adapter<SpecialEventsAdap
                 case R.id.tv_view_images:
                     position = Integer.parseInt(v.getTag() + "");
                     loadCardData(position);
+                    listener.dismissProgressDialog();
 
                     if (cardDataList.isEmpty()) {
-                        //TODO: Show appropriate dialog to user
+                        listener.noDataAvailableNow();
                         return;
                     }
 
@@ -99,8 +102,9 @@ public class SpecialEventsAdapter extends RecyclerView.Adapter<SpecialEventsAdap
                 case R.id.tv_watch_video:
                     position = Integer.parseInt(v.getTag() + "");
                     getVideoUrl(position);
+                    listener.dismissProgressDialog();
                     if (videoUrl == null) {
-                        //TODO: Show appropriate dialog to user
+                        listener.noDataAvailableNow();
                         return;
                     }
 
@@ -113,6 +117,9 @@ public class SpecialEventsAdapter extends RecyclerView.Adapter<SpecialEventsAdap
             void loadSlideShow(SlideShowFragment slideShowFragment);
             void loadVideo(String url);
             void setTypeFace(View v);
+            void showProgressDialog();
+            void dismissProgressDialog();
+            void noDataAvailableNow();
         }
 
         public void getVideoUrl(int index) {
@@ -127,7 +134,7 @@ public class SpecialEventsAdapter extends RecyclerView.Adapter<SpecialEventsAdap
                         Element element = doc.getElementsByTag("source").get(0);
                         videoUrl = element.attr("src");
                     } catch (Exception e) {
-                        //TODO: Show dialog to user
+                        listener.noDataAvailableNow();
                         Log.e("SpecialEventsAdapter", e + " 82 " + e.getMessage());
                         return;
                     }
