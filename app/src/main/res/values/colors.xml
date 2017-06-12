@@ -9,7 +9,7 @@
         <color name="viewBg">#f1f5f8</color>
         <color name="album_title">#feea53</color>
         <color name="album_sub_title_color">#aaa</color>
-        <color name="dull_background">#aaa</color>
+        <color name="dull_background">#222</color>
 
         <color name="bg_start">#aab1b9</color>
         <color name="bg_end">#aab1b9</color>

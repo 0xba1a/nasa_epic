@@ -15,12 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            style="@style/special_events_container">
+            style="@style/special_events_container"
+            android:background="@color/card_bg_color">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_title_text"
-                style="@style/special_events_title"/>
+                style="@style/special_events_title"
+                android:textColor="@color/album_title"/>
             <com.eastrivervillage.epic.SquareImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,7 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_content_text"
-                style="@style/special_events_content"/>
+                style="@style/special_events_content"
+                android:textColor="@color/album_sub_title_color"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
