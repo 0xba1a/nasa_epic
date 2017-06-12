@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.eastrivervillage.epic.VideoPlayerActivity">
+    tools:context="com.eastrivervillage.epic.VideoPlayerActivity"
+    android:background="@color/card_bg_color">
 
     <com.devbrackets.android.exomedia.ui.widget.VideoView
         android:id="@+id/video_view"
